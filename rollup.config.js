@@ -40,7 +40,7 @@ const plugins = [
 
 export default [
   {
-    input: 'src/button-card.ts',
+    input: 'src/hex-card.ts',
     output: {
       dir: './dist',
       format: 'es',

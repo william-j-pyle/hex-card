@@ -252,15 +252,15 @@ class ActionHandler extends HTMLElement implements ActionHandler {
   }
 }
 
-customElements.define('button-card-action-handler', ActionHandler);
+customElements.define('hex-card-action-handler', ActionHandler);
 
 const getActionHandler = (): ActionHandler => {
   const body = document.body;
-  if (body.querySelector('button-card-action-handler')) {
-    return body.querySelector('button-card-action-handler') as ActionHandler;
+  if (body.querySelector('hex-card-action-handler')) {
+    return body.querySelector('hex-card-action-handler') as ActionHandler;
   }
 
-  const actionhandler = document.createElement('button-card-action-handler');
+  const actionhandler = document.createElement('hex-card-action-handler');
   body.appendChild(actionhandler);
 
   return actionhandler as ActionHandler;

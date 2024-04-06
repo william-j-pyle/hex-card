@@ -1,21 +1,21 @@
-# Button Card by [@RomRider](https://github.com/RomRider) <!-- omit in toc -->
+# Hex Card by [@RomRider](https://github.com/RomRider) <!-- omit in toc -->
 
 [![Stable][releases-shield]][releases] [![Beta][releases-dev-shield]][releases-dev] [![HACS Badge][hacs-badge]][hacs-link] ![Project Maintenance][maintenance-shield] <br/> ![Downloads][downloads] [![GitHub Activity][commits-shield]][commits] [![License][license-shield]](LICENSE.md) [![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-[commits-shield]: https://img.shields.io/github/commit-activity/y/custom-cards/button-card.svg
-[commits]: https://github.com/custom-cards/button-card/commits/master
+[commits-shield]: https://img.shields.io/github/commit-activity/y/custom-cards/hex-card.svg
+[commits]: https://github.com/custom-cards/hex-card/commits/master
 [discord]: https://discord.gg/Qa5fW2R
 [discord-shield]: https://img.shields.io/discord/330944238910963714.svg
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/t/lovelace-button-card/65981
-[license-shield]: https://img.shields.io/github/license/custom-cards/button-card.svg
+[forum]: https://community.home-assistant.io/t/lovelace-hex-card/65981
+[license-shield]: https://img.shields.io/github/license/custom-cards/hex-card.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
-[releases-shield]: https://img.shields.io/github/release/custom-cards/button-card.svg
-[releases]: https://github.com/custom-cards/button-card/releases/latest
-[releases-dev-shield]: https://img.shields.io/github/package-json/v/custom-cards/button-card/dev?label=release%40dev
-[releases-dev]: https://github.com/custom-cards/button-card/releases
+[releases-shield]: https://img.shields.io/github/release/custom-cards/hex-card.svg
+[releases]: https://github.com/custom-cards/hex-card/releases/latest
+[releases-dev-shield]: https://img.shields.io/github/package-json/v/custom-cards/hex-card/dev?label=release%40dev
+[releases-dev]: https://github.com/custom-cards/hex-card/releases
 [hacs-badge]: https://img.shields.io/badge/HACS-Default-41BDF5.svg
-[downloads]: https://img.shields.io/github/downloads/custom-cards/button-card/total
+[downloads]: https://img.shields.io/github/downloads/custom-cards/hex-card/total
 [hacs-link]: https://hacs.xyz/
 
 Lovelace Button card for your entities.
@@ -96,7 +96,7 @@ Lovelace Button card for your entities.
 
 | Name | Type | Default | Supported options | Description |
 | --- | --- | --- | --- | --- |
-| `type` | string | **Required** | `custom:button-card` | Type of the card |
+| `type` | string | **Required** | `custom:hex-card` | Type of the card |
 | `template` | string | optional | any valid template from `button_card_templates` | See [configuration template](#Configuration-Templates) |
 | `entity` | string | optional | `switch.ac` | entity_id |
 | `triggers_update` | string or array | optional | `switch.ac` | entity_id list that would trigger a card update, see [triggers_update](#triggers_update) |
@@ -277,7 +277,7 @@ return states['switch.myswitch'].state // will match switch.myswitch
 
 In this second case, you have 2 options:
 
-- Set the value of `triggers_update` to `all` (This was the behavior of button-card < 3.3.0)
+- Set the value of `triggers_update` to `all` (This was the behavior of hex-card < 3.3.0)
 
   ```yaml
   triggers_update: all
@@ -286,7 +286,7 @@ In this second case, you have 2 options:
 - Set the value of `triggers_update` to a list of entities. When any of the entities in this list is updated, the card will be updated. The logic is the same as the internal home-assistant `* templates` integration (see [here](https://www.home-assistant.io/integrations/binary_sensor.template/#entity_id) for example):
 
   ```yaml
-  type: custom:button-card
+  type: custom:hex-card
   entity: sensor.mysensor # No need to repeat this one in the triggers_update, it is added by default
   triggers_update:
     - switch.myswitch
@@ -337,7 +337,7 @@ Special fields which do support templating but are **only evaluated once**, when
 - `entity`: You can use JS templates for the `entity` of the card configuration. It is mainly useful when you define your entity in as an entry in `variables`. This is evaluated once only when the configuration is loaded.
 
   ```yaml
-  type: custom:button-card
+  type: custom:hex-card
   variables:
     my_entity: switch.skylight
   entity: '[[[ return variables.my_entity; ]]]'
@@ -346,7 +346,7 @@ Special fields which do support templating but are **only evaluated once**, when
 - `triggers_update`: Useful when you define multiple entities in `variables` to use throughout the card. Eg:
 
   ```yaml
-  type: custom:button-card
+  type: custom:hex-card
   variables:
     my_entity: switch.skylight
     my_other_entity: light.bedroom
@@ -360,7 +360,7 @@ Special fields which do support templating but are **only evaluated once**, when
 
 Inside the javascript code, you'll have access to those variables:
 
-- `this`: The button-card element itself (advanced stuff, don't mess with it)
+- `this`: The hex-card element itself (advanced stuff, don't mess with it)
 - `entity`: The current entity object, if the entity is defined in the card
 - `states`: An object with all the states of all the entities (equivalent to `hass.states`)
 - `user`: The user object (equivalent to `hass.user`)
@@ -419,12 +419,12 @@ The `style` object members are:
 - `name`: styles for the name
 - `state`: styles for the state
 - `label`: styles for the label
-- `lock`: styles for the lock icon (see [here](https://github.com/custom-cards/button-card/blob/master/src/styles.ts#L73-L86) for the default style)
-- `tooltip`: styles for the tooltip overlay (see [here](https://github.com/custom-cards/button-card/blob/master/src/styles.ts#L30-L46))
+- `lock`: styles for the lock icon (see [here](https://github.com/custom-cards/hex-card/blob/master/src/styles.ts#L73-L86) for the default style)
+- `tooltip`: styles for the tooltip overlay (see [here](https://github.com/custom-cards/hex-card/blob/master/src/styles.ts#L30-L46))
 - `custom_fields`: styles for each of your custom fields. See [Custom Fields](#custom-fields)
 
 ```yaml
-- type: custom:button-card
+- type: custom:hex-card
   [...]
   styles:
     card:
@@ -467,8 +467,8 @@ See [styling](#styling) for a complete example.
 
 If a light entity is assigned to the button, then:
 
-- the CSS variable `--button-card-light-color` will contain the current light color
-- the CSS variable `--button-card-light-color-no-temperature` will contain the current light without the temperature
+- the CSS variable `--hex-card-light-color` will contain the current light color
+- the CSS variable `--hex-card-light-color-no-temperature` will contain the current light without the temperature
 
 You can use them both in other parts of the button. When off, it will be set to `var(--paper-item-icon-color)`
 
@@ -477,10 +477,10 @@ You can use them both in other parts of the button. When off, it will be set to 
 ```yaml
 styles:
   name:
-    - color: var(--button-card-light-color)
+    - color: var(--hex-card-light-color)
   card:
-    - -webkit-box-shadow: 0px 0px 9px 3px var(--button-card-light-color)
-    - box-shadow: 0px 0px 9px 3px var(--button-card-light-color)
+    - -webkit-box-shadow: 0px 0px 9px 3px var(--hex-card-light-color)
+    - box-shadow: 0px 0px 9px 3px var(--hex-card-light-color)
 ```
 
 #### ADVANCED styling options
@@ -492,7 +492,7 @@ For advanced styling, there are 2 other options in the `styles` config object:
 
 This is how the button is constructed (HTML elements):
 
-![elements in the button](examples/button-card-elements.png)
+![elements in the button](examples/hex-card-elements.png)
 
 The `grid` element uses CSS grids to design the layout of the card:
 
@@ -521,7 +521,7 @@ If we take the value and orient it into rows and columns, you begin to see the e
 
 The end product will results in the following grid layout
 
-![button card grid layout example with callouts](examples/button-card-grid-layout-example-with-callouts.png)
+![button card grid layout example with callouts](examples/hex-card-grid-layout-example-with-callouts.png)
 
 Some examples:
 
@@ -538,7 +538,7 @@ Some examples:
 - icon on the right side (by overloading an existing layout):
 
   ```yaml
-  - type: 'custom:button-card'
+  - type: 'custom:hex-card'
     entity: sensor.sensor1
     layout: icon_state_name2nd
     show_state: true
@@ -556,7 +556,7 @@ Some examples:
   ![apple-like-buttons](examples/apple_style.gif)
 
   ```yaml
-  - type: custom:button-card
+  - type: custom:hex-card
     entity: switch.skylight
     name: <3 Apple
     icon: mdi:fire
@@ -591,7 +591,7 @@ Some examples:
 
 #### Injecting CSS with `extra_styles`
 
-**Note**: `extra_styles` **MUST NOT** be used on the first button-card of the current view, else it will be applied to all the cards in all Lovelace. **It is not possible to fix this behaviour.**
+**Note**: `extra_styles` **MUST NOT** be used on the first hex-card of the current view, else it will be applied to all the cards in all Lovelace. **It is not possible to fix this behaviour.**
 
 You can inject any CSS style you want using this config option. It is useful if you want to inject CSS animations for example. This field supports [templates](#javascript-templates).
 
@@ -600,7 +600,7 @@ An example is better than words:
 ![change_background](examples/loop_background.gif)
 
 ```yaml
-- type: custom:button-card
+- type: custom:hex-card
   name: Change Background
   aspect_ratio: 2/1
   extra_styles: |
@@ -638,7 +638,7 @@ Custom fields also support embeded cards, see [example below](#custom_fields_car
 Each custom field supports its own styling config, the name needs to match between both objects needs to match:
 
 ```yaml
-- type: custom:button-card
+- type: custom:hex-card
   [...]
   custom_fields:
     test_element: My test element
@@ -656,7 +656,7 @@ Examples are better than a long text, so here you go:
   ![custom_fields_1](examples/custom_fields_1.gif)
 
   ```yaml
-  - type: custom:button-card
+  - type: custom:hex-card
     icon: mdi:lightbulb
     aspect_ratio: 1/1
     name: Nb lights on
@@ -691,7 +691,7 @@ Examples are better than a long text, so here you go:
   ![custom_fields_2](examples/custom_fields_2.png)
 
   ```yaml
-  - type: custom:button-card
+  - type: custom:hex-card
     entity: 'sensor.raspi_temp'
     icon: 'mdi:raspberry-pi'
     aspect_ratio: 1/1
@@ -793,7 +793,7 @@ Examples are better than a long text, so here you go:
   ![custom_fields_3](examples/custom_fields_card.png)
 
   ```yaml
-  - type: custom:button-card
+  - type: custom:hex-card
     aspect_ratio: 1/1
     custom_fields:
       graph:
@@ -822,10 +822,10 @@ Examples are better than a long text, so here you go:
       action: more-info
   ```
 
-To skip evaluating the templates in a custom_field (eg. you embed a `custom:button-card` inside a Custom Field), then you have to set `do_not_eval` to `true`.
+To skip evaluating the templates in a custom_field (eg. you embed a `custom:hex-card` inside a Custom Field), then you have to set `do_not_eval` to `true`.
 
 ```yaml
-type: custom:button-card
+type: custom:hex-card
 styles:
   grid:
     - grid-template-areas: "'test1' 'test2'"
@@ -834,7 +834,7 @@ variables:
 custom_fields:
   test1:
     card:
-      type: custom:button-card
+      type: custom:hex-card
       variables:
         c: 42
       ## This will return: B: 42 / C: undefined
@@ -846,11 +846,11 @@ custom_fields:
     ## for the card object in this custom field
     do_not_eval: true
     card:
-      type: custom:button-card
+      type: custom:hex-card
       variables:
         c: 42
       ## This will return: B: undefined / C: 42
-      ## as it is evaluated in the context of the local button-card
+      ## as it is evaluated in the context of the local hex-card
       ## inside the custom_field (which doesn't know about b)
       name: '[[[ return `B: ${variables.b} / C: ${variables.c}` ]]]'
 ```
@@ -859,20 +859,20 @@ custom_fields:
 
 #### General
 
-- Define your config template in the main lovelace configuration and then use it in your button-card. This will avoid a lot of repetitions! It's basically YAML anchors, but without using YAML anchors and is very useful if you split your config in multiple files 😄
+- Define your config template in the main lovelace configuration and then use it in your hex-card. This will avoid a lot of repetitions! It's basically YAML anchors, but without using YAML anchors and is very useful if you split your config in multiple files 😄
 - You can overload any parameter with a new one
 - You can merge states together **by `id`** when using templates. The states you want to merge have to have the same `id`. This `id` parameter is new and can be anything (string, number, ...). States without `id` will be appended to the state array. Styles embedded in a state are merged together as usual. See [here](#merging-state-by-id) for an example.
 - You can also inherit another template from within a template.
 - You can inherit multiple templates at once by making it an array. In this case, the templates will be merged together with the current configuration in the order they are defined. This happens recursively.
 
   ```yaml
-  type: custom:button-card
+  type: custom:hex-card
   template:
     - template1
     - template2
   ```
 
-  The button templates will be applied in the order they are defined: `template2` will be merged with `template1` and then the local config will be merged with the result. You can still chain templates together (ie. define template in a button-card template. It will follow the path recursively).
+  The button templates will be applied in the order they are defined: `template2` will be merged with `template1` and then the local config will be merged with the result. You can still chain templates together (ie. define template in a hex-card template. It will follow the path recursively).
 
 Make sure which type of lovelace dashboard you are using before changing the main lovelace configuration:
 
@@ -909,10 +909,10 @@ button_card_templates:
   my_little_template: [...]
 ```
 
-And then where you use button-card, you can apply this template, and/or overload it:
+And then where you use hex-card, you can apply this template, and/or overload it:
 
 ```yaml
-- type: custom:button-card
+- type: custom:hex-card
   template: header_red
   name: My Test Header
 ```
@@ -957,7 +957,7 @@ button_card_templates:
           name:
             - color: '#ff0000'
 ############### Used like this ##############
-  - type: custom:button-card
+  - type: custom:hex-card
     template: sensor_test
     entity: input_number.test
     show_entity_picture: true
@@ -997,12 +997,12 @@ button_card_templates:
 
 [...]
 
-- type: custom:button-card
+- type: custom:hex-card
   template: variable_test
   entity: sensor.test
   # name will be "var_value"
 
-- type: custom:button-card
+- type: custom:hex-card
   template: variable_test
   entity: sensor.test
   variables:
@@ -1030,14 +1030,14 @@ name: '[[[ return variable.value; ]]]'
 
 ### Manual Installation
 
-1. Download the [button-card](http://www.github.com/custom-cards/button-card/releases/latest/download/button-card.js)
+1. Download the [hex-card](http://www.github.com/custom-cards/hex-card/releases/latest/download/hex-card.js)
 2. Place the file in your `config/www` folder
 3. Include the card code in your `ui-lovelace-card.yaml`
 
    ```yaml
    title: Home
    resources:
-     - url: /local/button-card.js
+     - url: /local/hex-card.js
        type: module
    ```
 
@@ -1046,12 +1046,12 @@ name: '[[[ return variable.value; ]]]'
 ### Installation and tracking with `hacs`
 
 1. Make sure the [HACS](https://github.com/custom-components/hacs) component is installed and working.
-2. Search for `button-card` and add it through HACS
+2. Search for `hex-card` and add it through HACS
 3. Add the configuration to your `ui-lovelace.yaml`
 
    ```yaml
    resources:
-     - url: /hacsfiles/button-card/button-card.js
+     - url: /hacsfiles/hex-card/hex-card.js
        type: module
    ```
 
@@ -1064,7 +1064,7 @@ Show a button for the air conditioner (blue when on, `var(--disabled-text-color)
 ![ac](examples/ac.png)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   entity: switch.ac
   icon: mdi:air-conditioner
   color: rgb(28, 128, 199)
@@ -1073,7 +1073,7 @@ Show a button for the air conditioner (blue when on, `var(--disabled-text-color)
 Redefine the color when the state if off to red:
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   entity: switch.ac
   icon: mdi:air-conditioner
   color: rgb(28, 128, 199)
@@ -1089,7 +1089,7 @@ Show an ON/OFF button for the home_lights group:
 ![no-icon](examples/no_icon.png)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   entity: group.home_lights
   show_icon: false
   show_state: true
@@ -1102,7 +1102,7 @@ Light entity with custom icon and "more info" pop-in:
 ![sofa](examples/sofa.png)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   entity: light.living_room_lights
   icon: mdi:sofa
   color: auto
@@ -1117,7 +1117,7 @@ Light card with card color type, name, and automatic color:
 ![color](examples/color.gif)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   entity: light._
   icon: mdi:home
   color: auto
@@ -1145,11 +1145,11 @@ Horizontal stack with :
 ```yaml
 - type: horizontal-stack
   cards:
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: blank-card
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: blank-card
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: card
       color: rgb(223, 255, 97)
       icon: mdi:volume-plus
@@ -1158,7 +1158,7 @@ Horizontal stack with :
         service: media_player.volume_up
         data:
           entity_id: media_player.living_room_speaker
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: card
       color: rgb(223, 255, 97)
       icon: mdi:volume-minus
@@ -1167,9 +1167,9 @@ Horizontal stack with :
         service: media_player.volume_down
         data:
           entity_id: media_player.living_room_speaker
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: blank-card
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: blank-card
 ```
 
@@ -1190,33 +1190,33 @@ Vertical Stack with :
 ```yaml
 - type: vertical-stack
   cards:
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: label-card
       color: rgb(44, 109, 214)
       name: Kitchen
     - type: horizontal-stack
       cards:
-        - type: 'custom:button-card'
+        - type: 'custom:hex-card'
           entity: switch.kitchen_scene_1
           color_type: card
           color: rgb(66, 134, 244)
           icon: mdi:numeric-1-box-outline
-        - type: 'custom:button-card'
+        - type: 'custom:hex-card'
           entity: switch.kitchen_scene_2
           color_type: card
           color: rgb(66, 134, 244)
           icon: mdi:numeric-2-box-outline
-        - type: 'custom:button-card'
+        - type: 'custom:hex-card'
           entity: switch.kitchen_scene_3
           color_type: card
           color: rgb(66, 134, 244)
           icon: mdi:numeric-3-box-outline
-        - type: 'custom:button-card'
+        - type: 'custom:hex-card'
           entity: switch.kitchen_scene_4
           color_type: card
           color: rgb(66, 134, 244)
           icon: mdi:numeric-4-box-outline
-        - type: 'custom:button-card'
+        - type: 'custom:hex-card'
           entity: switch.kitchen_off
           color_type: card
           color: rgb(66, 134, 244)
@@ -1234,7 +1234,7 @@ Input select card with select next service and custom color and icon for states.
 If you don't specify any operator, `==` will be used to match the current state against the `value`
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   entity: input_select.cube_mode
   icon: mdi:cube
   tap_action:
@@ -1258,7 +1258,7 @@ If you don't specify any operator, `==` will be used to match the current state 
 The definition order matters, the first item to match will be the one selected.
 
 ```yaml
-- type: "custom:button-card"
+- type: "custom:hex-card"
   entity: sensor.temperature
   show_state: true
   state:
@@ -1283,7 +1283,7 @@ The definition order matters, the first item to match will be the one selected.
 Buttons can link to different views using the `navigate` action:
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: label-card
   icon: mdi:home
   name: Go To Home
@@ -1301,7 +1301,7 @@ You can make the whole button blink:
 ![blink-animation](examples/blink-animation.gif)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: card
   entity: binary_sensor.intruder
   name: Intruder Alert
@@ -1328,14 +1328,14 @@ If you specify a width for the card, it has to be in `px`. All the cards without
 ```yaml
 - type: horizontal-stack
   cards:
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: light.test_light
       color: auto
       name: s:default h:200px
       styles:
         card:
           - height: 200px
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: light.test_light
       color_type: card
       color: auto
@@ -1344,7 +1344,7 @@ If you specify a width for the card, it has to be in `px`. All the cards without
       styles:
         card:
           - height: 200px
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: light.test_light
       color_type: card
       color: auto
@@ -1355,7 +1355,7 @@ If you specify a width for the card, it has to be in `px`. All the cards without
           - height: 200px
 - type: horizontal-stack
   cards:
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: light.test_light
       color: auto
       name: 60px
@@ -1363,7 +1363,7 @@ If you specify a width for the card, it has to be in `px`. All the cards without
         card:
           - height: 60px
           - width: 60px
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: light.test_light
       color_type: card
       color: auto
@@ -1372,7 +1372,7 @@ If you specify a width for the card, it has to be in `px`. All the cards without
         card:
           - height: 80px
           - width: 30px
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: light.test_light
       color_type: card
       color: auto
@@ -1389,7 +1389,7 @@ If you specify a width for the card, it has to be in `px`. All the cards without
 ![label_template](examples/labels.png)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: icon
   entity: light.test_light
   label: >
@@ -1404,7 +1404,7 @@ If you specify a width for the card, it has to be in `px`. All the cards without
   styles:
     card:
       - height: 100px
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: icon
   entity: light.test_light
   layout: icon_label
@@ -1428,7 +1428,7 @@ The javascript code inside `value` needs to return `true` of `false`.
 Example with `template`:
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: icon
   entity: switch.skylight
   show_state: true
@@ -1445,7 +1445,7 @@ Example with `template`:
       icon: mdi:alert
     - operator: default
       icon: mdi:lightbulb
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: icon
   entity: light.test_light
   show_label: true
@@ -1467,7 +1467,7 @@ Example with `template`:
 ![per-style-config](examples/per-style-config.gif)
 
 ```yaml
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: icon
   entity: light.test_light
   label: >
@@ -1509,7 +1509,7 @@ Example with `template`:
           - color: red
         card:
           - filter: brightness(40%)
-- type: 'custom:button-card'
+- type: 'custom:hex-card'
   color_type: icon
   entity: light.test_light
   layout: icon_label
@@ -1545,11 +1545,11 @@ Example with `template`:
 ```yaml
 - type: horizontal-stack
   cards:
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       entity: switch.test
       lock:
         enabled: true
-    - type: 'custom:button-card'
+    - type: 'custom:hex-card'
       color_type: card
       lock:
         enabled: true
@@ -1566,37 +1566,37 @@ Example with `template`:
   cards:
     - type: horizontal-stack
       cards:
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 1/1
           icon: mdi:lightbulb
           aspect_ratio: 1/1
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 2/1
           icon: mdi:lightbulb
           aspect_ratio: 2/1
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 3/1
           icon: mdi:lightbulb
           aspect_ratio: 3/1
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 4/1
           icon: mdi:lightbulb
           aspect_ratio: 4/1
     - type: horizontal-stack
       cards:
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 1/1.2
           icon: mdi:lightbulb
           aspect_ratio: 1/1.2
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 1/1.3
           icon: mdi:lightbulb
           aspect_ratio: 1/1.3
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 1/1.4
           icon: mdi:lightbulb
           aspect_ratio: 1/1.4
-        - type: custom:button-card
+        - type: custom:hex-card
           name: 1/1.5
           icon: mdi:lightbulb
           aspect_ratio: 1/1.5

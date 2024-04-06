@@ -25,6 +25,6 @@
 - support for [custom_updater](https://github.com/custom-components/custom_updater) and [hacs](https://github.com/custom-components/hacs)
 
 ### Example:
-<img src="https://github.com/custom-cards/button-card/raw/master/examples/all.gif?raw=true" width="509px">
+<img src="https://github.com/custom-cards/hex-card/raw/master/examples/all.gif?raw=true" width="509px">
 
-### See the <a href="https://github.com/custom-cards/button-card/blob/master/README.md" target="_blank">Readme for installation and configuration</a>.
+### See the <a href="https://github.com/custom-cards/hex-card/blob/master/README.md" target="_blank">Readme for installation and configuration</a>.

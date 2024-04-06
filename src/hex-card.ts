@@ -91,20 +91,20 @@ const helperPromise = new Promise<void>(async (resolve) => {
 
 /* eslint no-console: 0 */
 console.info(
-  `%c  BUTTON-CARD  \n%c Version ${pjson.version} `,
+  `%c  HEX-CARD  \n%c Version ${pjson.version} `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray',
 );
 
 (window as any).customCards = (window as any).customCards || [];
 (window as any).customCards.push({
-  type: 'button-card',
-  name: 'Button-Card',
+  type: 'hex-card',
+  name: 'Hex-Card',
   preview: false,
   description: 'A massively customizable custom button card',
 });
 
-@customElement('button-card')
+@customElement('hex-card')
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class ButtonCard extends LitElement {
   @property() private _hass?: HomeAssistant;
@@ -933,7 +933,7 @@ class ButtonCard extends LitElement {
     const configCardStyle = this._buildStyleGeneric(this._stateObj, configState, 'card');
     const tooltipStyleFromConfig = this._buildStyleGeneric(this._stateObj, configState, 'tooltip');
     const classList: ClassInfo = {
-      'button-card-main': true,
+      'hex-card-main': true,
       disabled: !this._isClickable(this._stateObj, configState),
     };
     if (this._config?.tooltip) {
@@ -966,9 +966,9 @@ class ButtonCard extends LitElement {
     } else {
       aspectRatio.display = 'inline';
     }
-    this.style.setProperty('--button-card-light-color', this._getColorForLightEntity(this._stateObj, true));
+    this.style.setProperty('--hex-card-light-color', this._getColorForLightEntity(this._stateObj, true));
     this.style.setProperty(
-      '--button-card-light-color-no-temperature',
+      '--hex-card-light-color-no-temperature',
       this._getColorForLightEntity(this._stateObj, false),
     );
     lockStyle = { ...lockStyle, ...lockStyleFromConfig };
@@ -1206,8 +1206,7 @@ class ButtonCard extends LitElement {
     let mergedStateConfig: StateConfig[] | undefined;
     const tpls = tpl && Array.isArray(tpl) ? tpl : [tpl];
     tpls?.forEach((template) => {
-      if (!ll.config.button_card_templates?.[template])
-        throw new Error(`Button-card template '${template}' is missing!`);
+      if (!ll.config.button_card_templates?.[template]) throw new Error(`Hex-card template '${template}' is missing!`);
       const res = this._configFromLLTemplates(ll, ll.config.button_card_templates[template]);
       result = mergeDeep(result, res);
       mergedStateConfig = mergeStatesById(mergedStateConfig, res.state);
@@ -1231,7 +1230,7 @@ class ButtonCard extends LitElement {
     let template: ExternalButtonCardConfig = copy(config);
     template = this._configFromLLTemplates(ll, template);
     this._config = {
-      type: 'custom:button-card',
+      type: 'custom:hex-card',
       group_expand: false,
       hold_action: { action: 'none' },
       double_tap_action: { action: 'none' },

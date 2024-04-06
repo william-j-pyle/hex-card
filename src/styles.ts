@@ -60,7 +60,7 @@ export const styles = css`
     --iron-icon-width: 100%;
     --iron-icon-height: 100%;
   }
-  ha-card.button-card-main {
+  ha-card.hex-card-main {
     padding: 4% 0px;
     text-transform: none;
     font-weight: 400;
